@@ -6,10 +6,8 @@ import GithubAuth from './firebase/GithubAuth';
 function App() {
   return (
     <div>
-      <GoogleAuth />
-
+      {/* <GoogleAuth /> */}
       {/* <FacebookAuth /> */}
-
       {/* <GithubAuth /> */}
     </div>
   )
