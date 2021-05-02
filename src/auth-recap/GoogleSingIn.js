@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import firebaseConfig from '../firebase.confiq';
+import Button from '@material-ui/core/Button';
+import EmailIcon from '@material-ui/icons/Email';
+
+
 
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -50,11 +54,24 @@ const GoogleSingIn = () => {
     return (
         <div className='text-center p-5'>
             <h2>Google Sing In With Firebase</h2>
-            {
-                user.isLoggedIn ?
-                    <button className='btn btn-outline-success m-5' onClick={handleGoogleSingOut}>Google Sing Out</button>
-                    :
-                    <button className='btn btn-outline-success m-5' onClick={handleGoogleSingIn}>Google Sing In</button>
+            {user.isLoggedIn ?
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    startIcon={<EmailIcon />}
+                    onClick={handleGoogleSingOut}
+                >
+                    Google Sing Out
+              </Button>
+                :
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    startIcon={<EmailIcon />}
+                    onClick={handleGoogleSingIn}
+                >
+                    Google Sing In
+              </Button>
             }
             {
                 user.isLoggedIn && <div>

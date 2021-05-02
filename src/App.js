@@ -4,6 +4,7 @@ import FacebookAuth from './firebase/FacebookAuth';
 import GithubAuth from './firebase/GithubAuth';
 import GoogleSingIn from './auth-recap/GoogleSingIn';
 import From from './Form/From';
+import FacebookSingIn from './auth-recap/FacebookSingIn';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
       {/* <FacebookAuth /> */}
       {/* <GithubAuth /> */}
       {/* <GoogleSingIn /> */}
-      <From />
+      <FacebookSingIn />
+      {/* <From /> */}
     </div>
   )
 }

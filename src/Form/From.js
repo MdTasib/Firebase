@@ -17,6 +17,7 @@ const From = () => {
         success: false,
     })
 
+    // handle form submit
     const handleSubmit = (e) => {
         if (newUser && user.email && user.password) {
             firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
@@ -24,6 +25,7 @@ const From = () => {
                     const newUserInfo = { ...user };
                     newUserInfo.success = true;
                     setUser(newUserInfo);
+                    updateUserName(user.name);
                 })
                 .catch(error => {
                     const newUserInfo = { ...user };
@@ -32,12 +34,14 @@ const From = () => {
                     setUser(newUserInfo);
                 })
         }
+
         if (!newUser && user.email && user.password) {
-            firebase.auth().signOut()
+            firebase.auth().signInWithEmailAndPassword(user.email, user.password)
                 .then(result => {
                     const newUserInfo = { ...user };
                     newUserInfo.success = true;
                     setUser(newUserInfo);
+                    console.log('sing in user info', result.user);
                 })
                 .catch(error => {
                     const newUserInfo = { ...user };
@@ -49,6 +53,21 @@ const From = () => {
         e.preventDefault();
     }
 
+    // update user profile
+    const updateUserName = name => {
+        const user = firebase.auth().currentUser;
+        user.updateProfile({
+            displayName: name,
+        })
+            .then(() => {
+                console.log('user name update successfully');
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+    // handle form validation
     const handleBlur = e => {
         let isFieldValid = true;
         if (e.target.name === 'email') {
@@ -69,13 +88,13 @@ const From = () => {
     return (
         <div className='text-center pt-5 w-50 m-auto'>
             <h2>Our Own Authentication</h2>
-            <input class="form-check-input" type="checkbox" name="checkbok" onChange={() => setNewUser(!newUser)} />
-            <label class="form-check-label" htmlFor="newUser">New User Sing Up</label>
+            <input className="form-check-input" type="checkbox" name="checkbok" onChange={() => setNewUser(!newUser)} />
+            <label className="form-check-label" htmlFor="newUser">New User Sing Up</label>
             <form onSubmit={handleSubmit}>
                 {newUser && <input className='form-control' name='name' onBlur={handleBlur} type="text" placeholder='User Name' required />}<br />
                 <input className='form-control' name='email' onBlur={handleBlur} type="text" placeholder='Your Email' required /><br />
                 <input className='form-control' name='password' onBlur={handleBlur} type="password" placeholder='Your Password' required /><br />
-                <input className='btn btn-outline-success' type="submit" value="Submit" />
+                <input className='btn btn-outline-success' type="submit" value={newUser ? 'Sing Up' : 'Sing In'} />
             </form>
             <h3 className='m-2'>User Info</h3>
             <h6>Name : {user.name}</h6>
