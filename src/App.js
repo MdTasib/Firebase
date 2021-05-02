@@ -9,12 +9,18 @@ import FacebookSingIn from './auth-recap/FacebookSingIn';
 function App() {
   return (
     <div>
-      {/* <GoogleAuth /> */}
-      {/* <FacebookAuth /> */}
-      {/* <GithubAuth /> */}
-      {/* <GoogleSingIn /> */}
+      <p className='text-secondary'>Google Auth</p><hr />
+      <GoogleAuth />
+      <p className='text-secondary'>Facebook Auth</p><hr />
+      <FacebookAuth />
+      <p className='text-secondary'>Github Auth</p><hr />
+      <GithubAuth />
+      <p className='text-secondary'>Google Sing In</p><hr />
+      <GoogleSingIn />
+      <p className='text-secondary'>Facebook Sing In</p><hr />
       <FacebookSingIn />
-      {/* <From /> */}
+      <p className='text-secondary'>Sing up form</p><hr />
+      <From />
     </div>
   )
 }
