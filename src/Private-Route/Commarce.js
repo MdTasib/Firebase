@@ -20,7 +20,7 @@ const Commarce = () => {
             <Router>
                 <div>
                     <h3>User Email : {loggedInUser.email}</h3>
-                    <nav>
+                    <nav className='p-5'>
                         <ul>
                             <li>
                                 <Link to="/">Shop</Link>
@@ -31,6 +31,7 @@ const Commarce = () => {
                             <li>
                                 <Link to="/inventory">Inventory</Link>
                             </li>
+                            <button onClick={() => setLoggedInUser({})}>Sing Out</button>
                         </ul>
                     </nav>
                     <Switch>
