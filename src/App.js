@@ -5,11 +5,12 @@ import GithubAuth from './firebase/GithubAuth';
 import GoogleSingIn from './auth-recap/GoogleSingIn';
 import From from './Form/From';
 import FacebookSingIn from './auth-recap/FacebookSingIn';
+import Commarce from './Private-Route/Commarce';
 
 function App() {
   return (
     <div>
-      <p className='text-secondary'>Google Auth</p><hr />
+      {/* <p className='text-secondary'>Google Auth</p><hr />
       <GoogleAuth />
       <p className='text-secondary'>Facebook Auth</p><hr />
       <FacebookAuth />
@@ -20,7 +21,8 @@ function App() {
       <p className='text-secondary'>Facebook Sing In</p><hr />
       <FacebookSingIn />
       <p className='text-secondary'>Sing up form</p><hr />
-      <From />
+      <From /> */}
+      <Commarce />
     </div>
   )
 }
