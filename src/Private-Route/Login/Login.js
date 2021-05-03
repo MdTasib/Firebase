@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import firebaseConfig from './firebase.confiq';
 import GoogleSingIn from '../../auth-recap/GoogleSingIn';
+import { UserContext } from '../Commarce';
+import { useHistory, useLocation } from 'react-router-dom';
 
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -16,7 +18,13 @@ const Login = () => {
         password: '',
         error: '',
         success: false,
-    })
+    });
+
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const history = useHistory();
+    const location = useLocation();
+    let { from } = location.state || { from: { pathname: '/' } };
+
 
     // handle form submit
     const handleSubmit = (e) => {
@@ -42,7 +50,8 @@ const Login = () => {
                     const newUserInfo = { ...user };
                     newUserInfo.success = true;
                     setUser(newUserInfo);
-                    console.log('sing in user info', result.user);
+                    setLoggedInUser(newUserInfo);
+                    history.replace(from);
                 })
                 .catch(error => {
                     const newUserInfo = { ...user };
@@ -105,7 +114,6 @@ const Login = () => {
                     :
                     <p className='text-danger'>{user.error}</p>
             }
-            <GoogleSingIn />
         </div>
     );
 };
